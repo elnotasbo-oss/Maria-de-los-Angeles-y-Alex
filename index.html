@@ -6,48 +6,44 @@
     <title>Boda: Maria de los Angeles y Alex</title>
     <style>
         body { 
-            font-family: 'Georgia', serif; 
+            margin: 0; 
+            padding: 0; 
             background: url('fondo-estatico.jpg') no-repeat center center fixed; 
             background-size: cover; 
-            color: #333; 
-            text-align: center; 
-            margin: 0; 
-            padding: 20px;
+            font-family: 'Georgia', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        /* Eliminamos el fondo blanco de las secciones para que se vea el fondo estático */
-        .seccion { 
-            padding: 20px; 
-            margin: 20px auto; 
-            max-width: 800px; 
-        }
-        h1, h2 { color: #5a4a42; }
-        img { 
-            max-width: 100%; 
-            height: auto; 
-            margin-top: 15px; 
-            display: block; 
-            margin-left: auto; 
-            margin-right: auto; 
+        /* Las secciones ahora no tienen fondo ni márgenes restrictivos */
+        .seccion { width: 100%; text-align: center; }
+        img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        
+        /* Botón de sonido flotante */
+        #btnAudio {
+            position: fixed; top: 20px; right: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border: none; border-radius: 50%; width: 50px; height: 50px;
+            cursor: pointer; font-size: 24px; z-index: 1000;
         }
     </style>
 </head>
 <body>
 
+    <button id="btnAudio">🔊</button>
+
+    <!-- Sección 1: Portada (sin imagen, solo diseño) -->
     <div class="seccion">
         <h1>Maria de los Angeles & Alex</h1>
-        <p>¡Nos casamos! Nos encantaría que nos acompañes en este día tan especial.</p>
-        <img src="concrete-surface-background.jpg" alt="Portada">
     </div>
 
+    <!-- Sección 2: Historia -->
     <div class="seccion">
-        <h2>Nuestra Historia</h2>
-        <p>Un momento especial que queremos compartir con ustedes...</p>
         <img src="imagen1.png" alt="Nuestra Historia">
     </div>
 
+    <!-- Sección 3: Detalles -->
     <div class="seccion">
-        <h2>Detalles del Evento</h2>
-        <p>Esperamos contar con tu presencia.</p>
         <img src="imagen2.png" alt="Detalles">
     </div>
 
@@ -57,8 +53,18 @@
 
     <script>
         var audio = document.getElementById("musicaFondo");
+        var btn = document.getElementById("btnAudio");
         audio.volume = 0.1;
-        document.body.addEventListener('click', function() { audio.play(); }, { once: true });
+
+        btn.onclick = function() {
+            if (audio.paused) {
+                audio.play();
+                btn.innerHTML = "🔊";
+            } else {
+                audio.pause();
+                btn.innerHTML = "🔇";
+            }
+        };
     </script>
 </body>
 </html>
