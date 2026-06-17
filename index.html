@@ -6,19 +6,15 @@
     <title>Boda: Maria de los Angeles y Alex</title>
     <style>
         body { 
-            margin: 0; 
-            padding: 0; 
+            margin: 0; padding: 0; 
             background: url('fondo-estatico.jpg') no-repeat center center fixed; 
             background-size: cover; 
             font-family: 'Georgia', serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
         }
         .seccion { width: 100%; text-align: center; margin-bottom: 20px; }
         img { max-width: 90%; height: auto; display: block; margin: 0 auto; }
         
-        /* Botón de sonido flotante */
         #btnAudio {
             position: fixed; top: 20px; right: 20px;
             background: rgba(255, 255, 255, 0.7);
@@ -32,22 +28,11 @@
 
     <button id="btnAudio">🔊</button>
 
-    <!-- Sección 1: Imagen 1 -->
-    <div class="seccion">
-        <img src="imagen1.png" alt="Sección 1">
-    </div>
+    <div class="seccion"><img src="imagen1.png" alt="Sección 1"></div>
+    <div class="seccion"><img src="imagen.png" alt="Sección 2"></div>
+    <div class="seccion"><img src="imagen2.png" alt="Sección 3"></div>
 
-    <!-- Sección 2: Imagen (la que mencionaste como imagen.png) -->
-    <div class="seccion">
-        <img src="imagen.png" alt="Sección 2">
-    </div>
-
-    <!-- Sección 3: Imagen 2 -->
-    <div class="seccion">
-        <img src="imagen2.png" alt="Sección 3">
-    </div>
-
-    <audio id="musicaFondo" loop autoplay>
+    <audio id="musicaFondo" loop>
         <source src="fondo-1.mp3" type="audio/mpeg">
     </audio>
 
@@ -56,17 +41,18 @@
         var btn = document.getElementById("btnAudio");
         audio.volume = 0.1;
 
+        // Función para alternar silencio
         btn.onclick = function() {
-            if (audio.paused) {
-                audio.play();
+            if (audio.muted) {
+                audio.muted = false;
                 btn.innerHTML = "🔊";
             } else {
-                audio.pause();
+                audio.muted = true;
                 btn.innerHTML = "🔇";
             }
         };
 
-        // Autoplay inicial tras el primer clic en la página
+        // Activación automática al primer clic en cualquier lugar
         document.body.addEventListener('click', function() {
             if (audio.paused) {
                 audio.play();
