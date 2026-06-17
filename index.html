@@ -15,16 +15,16 @@
             flex-direction: column;
             align-items: center;
         }
-        /* Las secciones ahora no tienen fondo ni márgenes restrictivos */
-        .seccion { width: 100%; text-align: center; }
-        img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+        .seccion { width: 100%; text-align: center; margin-bottom: 20px; }
+        img { max-width: 90%; height: auto; display: block; margin: 0 auto; }
         
         /* Botón de sonido flotante */
         #btnAudio {
             position: fixed; top: 20px; right: 20px;
-            background: rgba(255, 255, 255, 0.5);
-            border: none; border-radius: 50%; width: 50px; height: 50px;
-            cursor: pointer; font-size: 24px; z-index: 1000;
+            background: rgba(255, 255, 255, 0.7);
+            border: 2px solid #5a4a42; border-radius: 50%; 
+            width: 50px; height: 50px;
+            cursor: pointer; font-size: 20px; z-index: 1000;
         }
     </style>
 </head>
@@ -32,19 +32,19 @@
 
     <button id="btnAudio">🔊</button>
 
-    <!-- Sección 1: Portada (sin imagen, solo diseño) -->
+    <!-- Sección 1: Imagen 1 -->
     <div class="seccion">
-        <h1>Maria de los Angeles & Alex</h1>
+        <img src="imagen1.png" alt="Sección 1">
     </div>
 
-    <!-- Sección 2: Historia -->
+    <!-- Sección 2: Imagen (la que mencionaste como imagen.png) -->
     <div class="seccion">
-        <img src="imagen1.png" alt="Nuestra Historia">
+        <img src="imagen.png" alt="Sección 2">
     </div>
 
-    <!-- Sección 3: Detalles -->
+    <!-- Sección 3: Imagen 2 -->
     <div class="seccion">
-        <img src="imagen2.png" alt="Detalles">
+        <img src="imagen2.png" alt="Sección 3">
     </div>
 
     <audio id="musicaFondo" loop autoplay>
@@ -65,6 +65,13 @@
                 btn.innerHTML = "🔇";
             }
         };
+
+        // Autoplay inicial tras el primer clic en la página
+        document.body.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true });
     </script>
 </body>
 </html>
