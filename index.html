@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="theme-color" content="#d9b6ad">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <meta property="og:title" content="Nuestra Boda: Maria de los Angeles y Alex">
+    <meta property="og:description" content="¡Te invitamos a celebrar con nosotros este noviembre!">
+    <meta property="og:image" content="https://elnotasbo-oss.github.io/Angeles-y-Alex/preview.jpg">
+    <meta property="og:type" content="website">
+
     <title>Boda: Maria de los Angeles y Alex</title>
     <style>
+        /* Ocultar contenido mientras carga para evitar parpadeos */
+        body { opacity: 0; transition: opacity 0.5s ease; }
+
         html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; }
         
-        /* Fondo estático de la invitación */
         #invitacion { 
             background: url('fondo-estatico.jpg') no-repeat center center fixed; 
             background-size: cover; 
@@ -16,7 +24,6 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* Capa del sobre (Portada) con animación de pulso */
         @keyframes pulso {
             0% { transform: scale(1); }
             50% { transform: scale(1.03); }
@@ -44,7 +51,7 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <div id="sobre"></div>
 
@@ -61,30 +68,28 @@
     </audio>
 
     <script>
+        // Hacer visible la página una vez cargada
+        window.onload = function() { document.body.style.opacity = '1'; };
+
         var audio = document.getElementById("musicaFondo");
         var btn = document.getElementById("btnAudio");
         var sobre = document.getElementById("sobre");
         audio.volume = 0.1;
 
-        // Al hacer clic en el sobre
         sobre.onclick = function() {
-            // 1. Intentar activar pantalla completa
             var elem = document.documentElement;
             if (elem.requestFullscreen) {
                 elem.requestFullscreen();
-            } else if (elem.webkitRequestFullscreen) { /* Safari/iOS */
+            } else if (elem.webkitRequestFullscreen) {
                 elem.webkitRequestFullscreen();
             }
             
-            // 2. Iniciar música
             audio.play();
             
-            // 3. Ocultar sobre
             sobre.style.opacity = '0';
             setTimeout(() => { sobre.style.display = 'none'; }, 1000);
         };
 
-        // Control de silencio
         btn.onclick = function() {
             if (audio.muted) {
                 audio.muted = false;
