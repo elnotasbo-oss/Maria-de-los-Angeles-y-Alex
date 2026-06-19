@@ -25,7 +25,7 @@
 
         @keyframes pulso {
             0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+            50% { transform: scale(1.015); } /* Ajuste de intensidad sutil */
             100% { transform: scale(1); }
         }
 
@@ -39,7 +39,7 @@
             background: url('sobre-cerrado.png') no-repeat center center;
             background-size: cover; 
             cursor: pointer;
-            animation: pulso 6s infinite ease-in-out;
+            animation: pulso 6s infinite ease-in-out; /* Duración relajada */
         }
 
         .seccion { width: 100vw; }
@@ -47,10 +47,11 @@
         
         #btnAudio {
             position: fixed; bottom: 20px; left: 20px;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.5); /* Transparencia 50% */
             border: 1px solid #5a4a42; border-radius: 50%; 
             width: 40px; height: 40px;
-            cursor: pointer; font-size: 16px; z-index: 1000;
+            cursor: pointer; font-size: 20px; z-index: 1000;
+            display: flex; align-items: center; justify-content: center;
         }
     </style>
 </head>
@@ -60,8 +61,8 @@
     <div id="contenedor-sobre">
         <div id="sobre"></div>
         
-       <!-- Flechas animadas ajustadas -->
-        <div style="position: absolute; top: 30%; width: 100%; display: flex; justify-content: center; pointer-events: none;">
+        <!-- Flechas animadas posicionadas arriba del centro -->
+        <div style="position: absolute; top: 32%; width: 100%; display: flex; justify-content: center; pointer-events: none;">
             <lottie-player src="Arrow.json" background="transparent" speed="1" style="width: 80px; height: 80px;" loop autoplay></lottie-player>
         </div>
     </div>
@@ -77,7 +78,7 @@
         <div class="seccion"><img src="imagen2.png" alt="Sección 3"></div>
     </div>
 
-    <button id="btnAudio">🔊</button>
+    <button id="btnAudio">🎵</button>
 
     <audio id="musicaFondo" loop>
         <source src="fondo-1.mp3" type="audio/mpeg">
@@ -89,10 +90,8 @@
         var audio = document.getElementById("musicaFondo");
         var btn = document.getElementById("btnAudio");
         var contenedorSobre = document.getElementById("contenedor-sobre");
-        var sobre = document.getElementById("sobre");
         audio.volume = 0.1;
 
-        // Ahora el clic es en el contenedor, que engloba sobre y flechas
         contenedorSobre.onclick = function() {
             var elem = document.documentElement;
             if (elem.requestFullscreen) { elem.requestFullscreen(); } 
@@ -104,8 +103,13 @@
         };
 
         btn.onclick = function() {
-            if (audio.muted) { audio.muted = false; btn.innerHTML = "🔊"; } 
-            else { audio.muted = true; btn.innerHTML = "🔇"; }
+            if (audio.muted) {
+                audio.muted = false;
+                btn.innerHTML = "🎵";
+            } else {
+                audio.muted = true;
+                btn.innerHTML = "🔇";
+            }
         };
     </script>
 </body>
