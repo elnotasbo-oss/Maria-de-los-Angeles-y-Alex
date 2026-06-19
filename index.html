@@ -11,15 +11,17 @@
     <meta property="og:type" content="website">
 
     <title>Boda: Maria de los Angeles y Alex</title>
-    <!-- Favicon para la pestaña del navegador -->
     <link rel="icon" type="image/png" href="favicon.png">
-    
-    <!-- Icono para "Agregar a pantalla de inicio" en móviles (Apple) -->
     <link rel="apple-touch-icon" href="favicon.png">
     
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <style>
-        body { opacity: 0; transition: opacity 0.5s ease; }
+        body { 
+            opacity: 0; 
+            transition: opacity 0.5s ease; 
+            font-family: 'Book Antiqua', 'Georgia', serif; 
+            color: #705E5E; 
+        }
         html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; }
         
         #invitacion { 
@@ -29,9 +31,21 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
+        /* Estilo para el Reloj Retro */
+        .reloj-container {
+            display: flex; justify-content: center; gap: 8px; margin: 40px 0 20px 0;
+        }
+        .flip-box {
+            background: #705E5E; color: #fff;
+            padding: 10px 5px; border-radius: 5px;
+            text-align: center; width: 55px;
+        }
+        .flip-box span { display: block; font-size: 22px; font-weight: bold; }
+        .flip-box label { font-size: 9px; text-transform: uppercase; }
+
         @keyframes pulso {
             0% { transform: scale(1); }
-            50% { transform: scale(1.015); } /* Ajuste de intensidad sutil */
+            50% { transform: scale(1.015); }
             100% { transform: scale(1); }
         }
 
@@ -45,50 +59,44 @@
             background: url('sobre-cerrado.png') no-repeat center center;
             background-size: cover; 
             cursor: pointer;
-            animation: pulso 5s infinite ease-in-out; /* Duración relajada */
+            animation: pulso 5s infinite ease-in-out;
         }
 
         .seccion { width: 100vw; }
         img { width: 100vw; height: auto; display: block; }
         
-       #btnAudio {
+        #btnAudio {
             position: fixed; bottom: 20px; left: 20px;
-            /* Eliminamos el background rgba y usamos background sólido con opacidad global */
             background: #ffffff; 
-            border: 1px solid #5a4a42; 
+            border: 1px solid #705E5E;
             border-radius: 50%; 
             width: 40px; height: 40px;
-            cursor: pointer; 
-            font-size: 20px; 
-            z-index: 1000;
+            cursor: pointer; font-size: 20px; z-index: 1000;
             display: flex; align-items: center; justify-content: center;
-            
-            /* Esta línea controla la transparencia de TODO el botón (icono, borde y fondo) */
-            opacity: 0.3; 
-            
-            /* Opcional: Esto hace que al pasar el mouse o tocarlo, se vea más claro */
-            transition: opacity 0.3s ease;
+            opacity: 0.3; transition: opacity 0.3s ease;
+            color: #705E5E;
         }
-
-        /* Efecto para que se vea normal al tocarlo */
-        #btnAudio:active {
-            opacity: 1;
-        }
+        #btnAudio:active { opacity: 1; }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-    <!-- Contenedor del sobre y flechas -->
     <div id="contenedor-sobre">
         <div id="sobre"></div>
-        
-        <!-- Flechas animadas posicionadas arriba del centro -->
         <div style="position: absolute; top: 32%; width: 100%; display: flex; justify-content: center; pointer-events: none;">
             <lottie-player src="Arrow.json" background="transparent" speed="1" style="width: 80px; height: 80px;" loop autoplay></lottie-player>
         </div>
     </div>
 
     <div id="invitacion">
+        <!-- Reloj al inicio -->
+        <div class="reloj-container" id="cuenta-regresiva">
+            <div class="flip-box"><span id="dias">0</span><label>Días</label></div>
+            <div class="flip-box"><span id="horas">0</span><label>Hrs</label></div>
+            <div class="flip-box"><span id="minutos">0</span><label>Min</label></div>
+            <div class="flip-box"><span id="segundos">0</span><label>Seg</label></div>
+        </div>
+
         <div class="seccion"><img src="imagen1.png" alt="Sección 1"></div>
         <div class="seccion"><img src="imagen.png" alt="Sección 2"></div>
         
@@ -96,12 +104,11 @@
             <lottie-player src="Wedding.json" background="transparent" speed="1" style="width: 85px; height: 85px;" loop autoplay></lottie-player>
         </div>
         
-        <div class="seccion"><img src="texto-1.png" alt="Sección 3"></div>
+        <div class="seccion"><img src="texto1.png" alt="Sección 3"></div>
 
-           <div style="display: flex; justify-content: center; margin: 20px 0;">
+        <div style="display: flex; justify-content: center; margin: 20px 0;">
             <lottie-player src="Wedding.json" background="transparent" speed="1" style="width: 85px; height: 85px;" loop autoplay></lottie-player>
         </div>
-        
     </div>
 
     <button id="btnAudio">🎵</button>
@@ -113,6 +120,18 @@
     <script>
         window.onload = function() { document.body.style.opacity = '1'; };
 
+        // Lógica del Reloj
+        const fechaDestino = new Date("Nov 28, 2026 00:00:00").getTime();
+        const x = setInterval(function() {
+            const ahora = new Date().getTime();
+            const distancia = fechaDestino - ahora;
+            document.getElementById("dias").innerHTML = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            document.getElementById("horas").innerHTML = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            document.getElementById("minutos").innerHTML = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("segundos").innerHTML = Math.floor((distancia % (1000 * 60)) / 1000);
+            if (distancia < 0) { clearInterval(x); document.getElementById("cuenta-regresiva").innerHTML = "¡Es hoy!"; }
+        }, 1000);
+
         var audio = document.getElementById("musicaFondo");
         var btn = document.getElementById("btnAudio");
         var contenedorSobre = document.getElementById("contenedor-sobre");
@@ -122,20 +141,14 @@
             var elem = document.documentElement;
             if (elem.requestFullscreen) { elem.requestFullscreen(); } 
             else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); }
-            
             audio.play();
             contenedorSobre.style.opacity = '0';
             setTimeout(() => { contenedorSobre.style.display = 'none'; }, 1000);
         };
 
         btn.onclick = function() {
-            if (audio.muted) {
-                audio.muted = false;
-                btn.innerHTML = "🎵";
-            } else {
-                audio.muted = true;
-                btn.innerHTML = "🔇";
-            }
+            if (audio.muted) { audio.muted = false; btn.innerHTML = "🎵"; } 
+            else { audio.muted = true; btn.innerHTML = "🔇"; }
         };
     </script>
 </body>
