@@ -105,29 +105,38 @@
         </div>
         <div style="display: flex; justify-content: space-around; gap: 10px; margin: 30px 10px;">
     
- <div style="background-color: rgba(255, 255, 255, 0.7); padding: 20px; border-radius: 15px; margin: 20px 10px; backdrop-filter: blur(5px);">
-        
-        <h3 style="text-align: center; color: #705E5E; margin: 0 0 15px 0; font-family: 'Book Antiqua', serif; font-size: 16px; text-transform: uppercase;">
-            Toca para ver ubicaciones
-        </h3>
+<!-- Contenedor de Ubicaciones: Franja de borde a borde -->
+<div style="background-color: rgba(255, 255, 255, 0.3); 
+            padding: 20px 10px; 
+            margin: 20px 0; 
+            width: 100%; 
+            box-sizing: border-box;
+            backdrop-filter: blur(5px);">
+    
+    <h3 style="text-align: center; color: #705E5E; margin: 0 0 15px 0; font-family: 'Book Antiqua', serif; font-size: 16px; text-transform: uppercase;">
+        Toca para ver ubicaciones
+    </h3>
 
-        <div style="display: flex; justify-content: space-around; gap: 10px;">
-            <style>
-                @keyframes respirar { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-                .boton-ubicacion { animation: respirar 3s infinite ease-in-out; }
-            </style>
+    <div style="display: flex; justify-content: space-around; gap: 15px;">
+        <!-- Estilo de animación -->
+        <style>
+            @keyframes respirar { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+            .boton-ubicacion { animation: respirar 3s infinite ease-in-out; }
+        </style>
 
-            <a href="https://maps.app.goo.gl/baDi4EdXkX64Nzip9" target="_blank" class="boton-ubicacion"
-               style="flex: 1; text-decoration: none; color: #705E5E; border: 1px solid #705E5E; padding: 12px 5px; border-radius: 5px; font-weight: bold; font-size: 18px; text-align: center;">
-               ⛪<br><span style="font-size: 10px;">CATEDRAL</span>
-            </a>
+        <!-- Botón Iglesia -->
+        <a href="https://maps.app.goo.gl/baDi4EdXkX64Nzip9" target="_blank" class="boton-ubicacion"
+           style="flex: 1; text-decoration: none; color: #705E5E; border: 1px solid #705E5E; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 18px; text-align: center;">
+           ⛪<br><span style="font-size: 10px;">CATEDRAL</span>
+        </a>
 
-            <a href="https://maps.app.goo.gl/MJSLMNVCDP3csyFo7" target="_blank" class="boton-ubicacion"
-               style="flex: 1; text-decoration: none; color: #705E5E; border: 1px solid #705E5E; padding: 12px 5px; border-radius: 5px; font-weight: bold; font-size: 18px; text-align: center;">
-               🥂<br><span style="font-size: 10px;">SALÓN</span>
-            </a>
-        </div>
+        <!-- Botón Salón -->
+        <a href="https://maps.app.goo.gl/MJSLMNVCDP3csyFo7" target="_blank" class="boton-ubicacion"
+           style="flex: 1; text-decoration: none; color: #705E5E; border: 1px solid #705E5E; padding: 10px; border-radius: 8px; font-weight: bold; font-size: 18px; text-align: center;">
+           🥂<br><span style="font-size: 10px;">SALÓN</span>
+        </a>
     </div>
+</div>
     
 </div>
     </div>
