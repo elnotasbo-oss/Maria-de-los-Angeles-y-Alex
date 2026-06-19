@@ -21,19 +21,19 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-     /* Estilo Reloj reducido y minimalista */
+/* Estilo Reloj super compacto y minimalista */
         .reloj-container {
-            display: flex; justify-content: center; gap: 5px; margin: 10px 0;
+            display: flex; justify-content: center; gap: 4px; margin: 5px 0;
         }
         .flip-box {
             border: 1px solid #705E5E;
             color: #705E5E;
-            padding: 3px; border-radius: 3px;
-            text-align: center; width: 32px; /* Reducido de 45px a 32px */
+            padding: 2px; border-radius: 2px;
+            text-align: center; width: 26px; /* Aún más estrecho */
         }
-        .flip-box span { display: block; font-size: 14px; font-weight: bold; } /* Reducido de 18px a 14px */
-        .flip-box label { font-size: 7px; text-transform: uppercase; } /* Reducido de 8px a 7px */
-
+        .flip-box span { display: block; font-size: 12px; font-weight: bold; }
+        .flip-box label { font-size: 6px; text-transform: uppercase; }
+        
         @keyframes pulso {
             0% { transform: scale(1); }
             50% { transform: scale(1.015); }
@@ -80,7 +80,7 @@
            <div style="display: flex; justify-content: center; margin: 20px 0;">
             <lottie-player src="anillos.json" background="transparent" speed="1" style="width: 85px; height: 85px;" loop autoplay></lottie-player>
         </div>
-        <div class="seccion"><img src="imagen-1.png" alt="Sección 1"></div>
+        <div class="seccion"><img src="imagen1.png" alt="Sección 1"></div>
         
         <!-- Reloj movido debajo de imagen1.png -->
         <div class="reloj-container" id="cuenta-regresiva">
