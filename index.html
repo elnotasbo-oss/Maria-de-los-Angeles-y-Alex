@@ -15,7 +15,7 @@
         .flip-box span { display: block; font-size: 12px; font-weight: bold; }
         .flip-box label { font-size: 6px; text-transform: uppercase; }
         @keyframes pulso { 0% { transform: scale(1); } 50% { transform: scale(1.015); } 100% { transform: scale(1); } }
-        #contenedor-sobre { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; transition: opacity 1s ease; }
+        #contenedor-sobre { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 2000; transition: opacity 1s ease; background: #fff; }
         #sobre { width: 100%; height: 100%; background: url('sobre-cerrado.png') no-repeat center center; background-size: cover; cursor: pointer; animation: pulso 5s infinite ease-in-out; }
         .seccion { width: 100vw; }
         img { width: 100vw; height: auto; display: block; }
@@ -29,6 +29,7 @@
             <lottie-player src="Arrow.json" background="transparent" speed="1" style="width: 80px; height: 80px;" loop autoplay></lottie-player>
         </div>
     </div>
+
     <div id="invitacion">
         <div class="seccion"><img src="imagen-1.png" alt="Sección 1"></div>
         <div style="display: flex; justify-content: center; margin: 20px 0;">
@@ -36,7 +37,6 @@
         </div>
 
         <div class="seccion"><img src="imagen.png" alt="Sección 2"></div>
-
         <div class="seccion"><img src="texto-1.png" alt="Texto 1"></div>
         <div style="display: flex; justify-content: center; margin: 20px 0;">
             <lottie-player src="anilloss.json" background="transparent" speed="1" style="width: 70px; height: 70px;" loop autoplay></lottie-player>
@@ -60,6 +60,55 @@
                 <a href="URL_SALON" target="_blank" style="text-decoration: none; color: #705E5E; border: 1px solid #705E5E; padding: 6px 12px; border-radius: 8px; font-weight: bold; font-size: 14px; text-align: center; min-width: 80px;">🥂<br><span style="font-size: 9px;">SALÓN</span></a>
             </div>
         </div>
-        </div>
+    </div>
 
-    <div id="btnAudio" style="position: fixed; bottom: 20px; left: 20px; width: 45px;
+    <div id="btnAudio" style="position: fixed; bottom: 20px; left: 20px; width: 45px; height: 45px; cursor: pointer; z-index: 1000; opacity: 0.6;">
+        <lottie-player id="lottieMusic" src="Music.json" background="transparent" speed="1" style="width: 100%; height: 100%;" loop autoplay></lottie-player>
+    </div>
+    <audio id="musicaFondo" loop><source src="fondo-1.mp3" type="audio/mpeg"></audio>
+
+    <script>
+        window.onload = function() { document.body.style.opacity = '1'; };
+        
+        // Cuenta regresiva
+        const fechaDestino = new Date("Nov 28, 2026 13:00:00").getTime();  
+        const x = setInterval(function() {
+            const ahora = new Date().getTime();
+            const distancia = fechaDestino - ahora;
+            const d = Math.floor(distancia / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distancia % (1000 * 60)) / 1000);
+            
+            document.getElementById("dias").innerHTML = d;
+            document.getElementById("horas").innerHTML = h;
+            document.getElementById("minutos").innerHTML = m;
+            document.getElementById("segundos").innerHTML = s;
+            if (distancia < 0) clearInterval(x);
+        }, 1000);
+
+        var audio = document.getElementById("musicaFondo");
+        var btn = document.getElementById("btnAudio");
+        var lottieMusic = document.getElementById("lottieMusic");
+        var contenedorSobre = document.getElementById("contenedor-sobre");
+
+        contenedorSobre.onclick = function() {
+            audio.play();
+            contenedorSobre.style.opacity = '0';
+            setTimeout(() => { contenedorSobre.style.display = 'none'; }, 1000);
+        };
+
+        btn.onclick = function() {
+            if (audio.paused) {
+                audio.play();
+                lottieMusic.play();
+                btn.style.opacity = '0.6';
+            } else {
+                audio.pause();
+                lottieMusic.pause();
+                btn.style.opacity = '0.3';
+            }
+        };
+    </script>
+</body>
+</html>
